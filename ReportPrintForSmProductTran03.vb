@@ -1,10 +1,10 @@
 Public Class ReportPrintForSmProductTran03
   
-#Region " ÅÜ¼Æ«Å§i "
-    Private mPGMID As String = "PrintSmProductTran03" 'µ{¦¡¥N¸¹
+#Region " è®Šæ•¸å®£å‘Šxxx "
+    Private mPGMID As String = "PrintSmProductTran03" 'ç¨‹å¼ä»£è™Ÿ
     Private ReportPrintForSmProductTran03UCO As ReportPrintForSmProductTran03UCO
     Private mSmProductTranDataTable As THS.MES.DataService.MIS.dsMIS.SmProductTranDataTable
-    Private mFirstLoad As Boolean = True 'ªì¦¸¸ü¤JºX¼Ğ
+    Private mFirstLoad As Boolean = True 'åˆæ¬¡è¼‰å…¥æ——æ¨™
     Private mConnectionString_THS As String = ""
     Private mConnectionString_MES As String = ""
     Private mConnectionString_MIS As String = ""
@@ -15,92 +15,92 @@ Public Class ReportPrintForSmProductTran03
 
 #Region " FormLoad "
     Private Sub PrintSmProductTran_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'ÀË®Ö¬O§_¤wµn¤J
+        'æª¢æ ¸æ˜¯å¦å·²ç™»å…¥
 
         If Not Thread.CurrentPrincipal.Identity.IsAuthenticated Then
             Dim LoginForm As New LoginForm
             If LoginForm.ShowDialog() <> Windows.Forms.DialogResult.OK Then
-                MessageBox.Show("µLÅv¨Ï¥Î¥»¨t²Î!", "¨t²Î°T®§", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("ç„¡æ¬Šä½¿ç”¨æœ¬ç³»çµ±!", "ç³»çµ±è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Me.Close()
             End If
         End If
         Me.myAuButtonWin.SetButtonInvisible(THS.Security.AUControl.AuButtonWin.ButtonMode.Save)
         Me.myAuButtonWin.SetButtonInvisible(THS.Security.AUControl.AuButtonWin.ButtonMode.Cancel)
-        'ªì©l¤Æ UCO
+        'åˆå§‹åŒ– UCO
         Me.Initial_Entity()
-        'ªì©l©Ò¦³ªº±±¨î¶µ
+        'åˆå§‹æ‰€æœ‰çš„æ§åˆ¶é …
         Me.InitialAllControls()
-        '³]©wªì¦¸¸ü¤JºX¼Ğ
+        'è¨­å®šåˆæ¬¡è¼‰å…¥æ——æ¨™
         mFirstLoad = False
     End Sub
 #End Region
 
-#Region " ComboBox ¨Æ¥ó"
-    '¼t°Ï§OÅÜ§ó
+#Region " ComboBox äº‹ä»¶"
+    'å» å€åˆ¥è®Šæ›´
     Private Sub LookUpEdit_LocationID_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LookUpEdit_LocationID.EditValueChanged
         Try
             If mFirstLoad Then Return
             Me.InitialBindGridInfo()
         Catch ex As Exception
-            MessageBox.Show("¼t°Ï§OÅÜ§óµe­±ªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message, "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("å» å€åˆ¥è®Šæ›´ç•«é¢åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message, "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    '²£«~Ãş§OÅÜ§ó
+    'ç”¢å“é¡åˆ¥è®Šæ›´
     Private Sub LookUpEdit_ProductType_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LookUpEdit_ProductType.EditValueChanged
         Try
             If mFirstLoad Then Return
             Me.InitialBindGridInfo()
         Catch ex As Exception
-            MessageBox.Show("²£«~Ãş§OÅÜ§óµe­±ªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message, "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("ç”¢å“é¡åˆ¥è®Šæ›´ç•«é¢åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message, "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    '³¡ªù°_¨´ÅÜ§ó
+    'éƒ¨é–€èµ·è¿„è®Šæ›´
     Private Sub LookUpEdit_DeptID_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LookUpEdit_DeptIDS.EditValueChanged, LookUpEdit_DeptIDE.EditValueChanged
         Try
             If mFirstLoad Then Return
             If Me.LookUpEdit_DeptIDS.EditValue > Me.LookUpEdit_DeptIDE.EditValue Then
-                MessageBox.Show("³¡ªù°_¨´¿ù»~¡I", "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("éƒ¨é–€èµ·è¿„éŒ¯èª¤ï¼", "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
             Me.InitialBindGridInfo()
         Catch ex As Exception
-            MessageBox.Show("³¡ªù°_¨´ÅÜ§óµe­±ªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message, "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("éƒ¨é–€èµ·è¿„è®Šæ›´ç•«é¢åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message, "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    '¤é´Á°_¨´ÅÜ§ó
+    'æ—¥æœŸèµ·è¿„è®Šæ›´
     Private Sub DateEdit_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DateEdit_S.EditValueChanged, DateEdit_E.EditValueChanged
         Try
             If mFirstLoad Then Return
             If Me.DateEdit_S.DateTime > Me.DateEdit_E.DateTime Then
-                MessageBox.Show("¤é´Á°_¨´¿ù»~¡I", "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("æ—¥æœŸèµ·è¿„éŒ¯èª¤ï¼", "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
             Me.InitialBindGridInfo()
         Catch ex As Exception
-            MessageBox.Show("¤é´Á°_¨´ÅÜ§óµe­±ªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message, "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("æ—¥æœŸèµ·è¿„è®Šæ›´ç•«é¢åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message, "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    'RadioButtonÅÜ§ó
+    'RadioButtonè®Šæ›´
     Private Sub RadioButton_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtnStockOut.CheckedChanged, rbtnStockInMonth.CheckedChanged, rbtnStockIn.CheckedChanged, rbtnStockReturn.CheckedChanged
         Try
-            If Me.rbtnStockIn.Checked = True Then '¤J®w³æ
+            If Me.rbtnStockIn.Checked = True Then 'å…¥åº«å–®
                 mReportType = "1"
                 pTransTypeCode(0) = "01"
                 pTransTypeCode(1) = ""
-            ElseIf Me.rbtnStockInMonth.Checked = True Then '¤ë³øªí
+            ElseIf Me.rbtnStockInMonth.Checked = True Then 'æœˆå ±è¡¨
                 mReportType = "9"
                 pTransTypeCode(0) = "01"
                 pTransTypeCode(1) = ""
-            ElseIf Me.rbtnStockOut.Checked Then '¥X®w³æ
+            ElseIf Me.rbtnStockOut.Checked Then 'å‡ºåº«å–®
                 mReportType = "2"
                 pTransTypeCode(0) = "19"
                 pTransTypeCode(1) = ""
-            Else '­ç°h¤JÀx¶qªí
+            Else 'å‰”é€€å…¥å„²é‡è¡¨
                 mReportType = "3"
                 pTransTypeCode(0) = "01"
                 pTransTypeCode(1) = "19"
             End If
             Me.InitialBindGridInfo()
         Catch ex As Exception
-            MessageBox.Show("RadioButtonÅÜ§óµe­±ªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message, "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("RadioButtonè®Šæ›´ç•«é¢åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message, "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
     End Sub
@@ -108,7 +108,7 @@ Public Class ReportPrintForSmProductTran03
 #End Region
 
 
-#Region " Button ¨Æ¥ó "
+#Region " Button äº‹ä»¶ "
     Private Sub myAuButtonWin_ButtonPrint_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles myAuButtonWin.ButtonPrint_Click
         Dim tempDateS, tempDateE As String
         Dim tempDate As Date
@@ -119,7 +119,7 @@ Public Class ReportPrintForSmProductTran03
         'tempDateE = tempDate.AddDays(-1)
         Dim SmProductTranReport As New THS.MES.Report.MISReport.MISReport(mConnectionString_MIS, mConnectionString_THS)
         If mReportType = "9" Then
-            '¤ë³øªí
+            'æœˆå ±è¡¨
             Dim Report As XtraReport = SmProductTranReport.GetSmProductTranReport07(Me.LookUpEdit_LocationID.EditValue, tempDateS, tempDateE, _
                   Me.LookUpEdit_DeptIDS.EditValue, Me.LookUpEdit_DeptIDE.EditValue, Me.DateEditPrint.DateTime)
             Report.ShowPreviewDialog()
@@ -132,37 +132,37 @@ Public Class ReportPrintForSmProductTran03
     End Sub
 #End Region
 
-#Region " ±±¨î¶µªì©l¤Æ "
+#Region " æ§åˆ¶é …åˆå§‹åŒ– "
     Private Sub InitialAllControls()
         Try
-            'ªì©l¼t°Ï§O¿ï³æ
+            'åˆå§‹å» å€åˆ¥é¸å–®
             Me.InitialLocation()
-            'ªì©l²£«~Ãş§O
+            'åˆå§‹ç”¢å“é¡åˆ¥
             Me.InitialProductType()
-            'ªì©l³¡ªù§O
+            'åˆå§‹éƒ¨é–€åˆ¥
             Me.InitialDeptID()
-            'ªì©l²§°Ê¤é´Á°_¨´
+            'åˆå§‹ç•°å‹•æ—¥æœŸèµ·è¿„
             Me.InitialTransDate()
-            'ªì©l¦Lªí¤é´Á
+            'åˆå§‹å°è¡¨æ—¥æœŸ
             Me.DateEditPrint.DateTime = Today
-            'ªì©l¦Lªí¿ï¶µ
+            'åˆå§‹å°è¡¨é¸é …
             Me.rbtnStockIn.Checked = True
-            'ªì©lGridView
+            'åˆå§‹GridView
             Me.InitialBindGridInfo()
 
         Catch ex As Exception
-            Throw New Exception("±±¨î¶µªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message)
+            Throw New Exception("æ§åˆ¶é …åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message)
         End Try
     End Sub
 
-    'ªì©l¼t°Ï§O
+    'åˆå§‹å» å€åˆ¥
     Private Sub InitialLocation()
         Try
             With Me.LookUpEdit_LocationID
                 .Properties.DataSource = Me.ReportPrintForSmProductTran03UCO.QueryLocation()
                 .Properties.DisplayMember = "LocationDesc"
                 .Properties.ValueMember = "LocationID"
-                '³]©w¹w³]­È
+                'è¨­å®šé è¨­å€¼
                 For tempI = 0 To Me.ReportPrintForSmProductTran03UCO.QueryLocation().Rows.Count - 1
                     If Trim(Me.ReportPrintForSmProductTran03UCO.QueryLocation().Rows(tempI).Item("LocationID")) = Trim(My.Settings.DefaultLocation) Then
                         .ItemIndex = tempI
@@ -172,18 +172,18 @@ Public Class ReportPrintForSmProductTran03
             End With
             Me.LookUpEdit_LocationID.Enabled = False
         Catch ex As Exception
-            Throw New Exception("¼t°Ï§Oªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message)
+            Throw New Exception("å» å€åˆ¥åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message)
         End Try
 
     End Sub
-    'ªì©l²£«~Ãş§O
+    'åˆå§‹ç”¢å“é¡åˆ¥
     Private Sub InitialProductType()
         Try
             Dim tempProductTypeForComboDataTable As DataTable = ReportPrintForSmProductTran03UCO.QueryProductTypeForCombo(Me.LookUpEdit_LocationID.EditValue, "*ALL")
 
             Dim mRow As DataRow = tempProductTypeForComboDataTable.NewRow
             mRow.Item("ProductType") = "*ALL"
-            mRow.Item("ProductTypeDesc") = "¥ş³¡"
+            mRow.Item("ProductTypeDesc") = "å…¨éƒ¨"
             tempProductTypeForComboDataTable.Rows.InsertAt(mRow, 0)
 
             With Me.LookUpEdit_ProductType.Properties
@@ -195,17 +195,17 @@ Public Class ReportPrintForSmProductTran03
             Me.LookUpEdit_ProductType.EditValue = "*ALL"
 
         Catch ex As Exception
-            Throw New Exception("²£«~Ãş§Oªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message)
+            Throw New Exception("ç”¢å“é¡åˆ¥åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message)
         End Try
     End Sub
-    'ªì©l³¡ªù§O
+    'åˆå§‹éƒ¨é–€åˆ¥
     Private Sub InitialDeptID()
         Try
             Dim tempDeptIDForComboDataTable As DataTable = ReportPrintForSmProductTran03UCO.QueryDeptID(Me.LookUpEdit_LocationID.EditValue)
 
             Dim mRow As DataRow = tempDeptIDForComboDataTable.NewRow
             mRow.Item("DeptID") = "*ALL"
-            mRow.Item("DeptDesc") = "¥ş³¡"
+            mRow.Item("DeptDesc") = "å…¨éƒ¨"
             tempDeptIDForComboDataTable.Rows.InsertAt(mRow, 0)
 
             With Me.LookUpEdit_DeptIDS.Properties
@@ -225,10 +225,10 @@ Public Class ReportPrintForSmProductTran03
             Me.LookUpEdit_DeptIDE.EditValue = "*ALL"
 
         Catch ex As Exception
-            Throw New Exception("³¡ªù§Oªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message)
+            Throw New Exception("éƒ¨é–€åˆ¥åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message)
         End Try
     End Sub
-    'ªì©l²§°Ê¤é´Á°_¨´
+    'åˆå§‹ç•°å‹•æ—¥æœŸèµ·è¿„
     Private Sub InitialTransDate()
         Me.DateEdit_S.DateTime = Today
         Me.DateEdit_E.DateTime = Today
@@ -238,13 +238,13 @@ Public Class ReportPrintForSmProductTran03
 
 #Region " InitialBindGridInfo "
 
-    'ªì©lGridControl
+    'åˆå§‹GridControl
     Private Sub InitialBindGridInfo()
         Try
 
             Me.mSmProductTranDataTable = ReportPrintForSmProductTran03UCO.QueryAllSmProductTran(Me.LookUpEdit_LocationID.EditValue, Me.DateEdit_S.DateTime, Me.DateEdit_E.DateTime, _
                                                         Me.LookUpEdit_DeptIDS.EditValue, Me.LookUpEdit_DeptIDE.EditValue, pTransTypeCode)
-            '¨ú±o¸ê®Æ
+            'å–å¾—è³‡æ–™
             Dim FDataView As DataView = Me.mSmProductTranDataTable.DefaultView
             Dim tempProductType As String = Me.LookUpEdit_ProductType.EditValue
            FDataView.Sort = "ProductType,TransDate,DeptID"
@@ -256,10 +256,10 @@ Public Class ReportPrintForSmProductTran03
             Me.gridSmProductTran.DataSource = FDataView
             Me.DataLayoutControl1.DataSource = FDataView
             If FDataView.Count = 0 Then
-                MessageBox.Show("µL¬ÛÃö¸ê®Æ¡I", "¿ù»~°T®§", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("ç„¡ç›¸é—œè³‡æ–™ï¼", "éŒ¯èª¤è¨Šæ¯", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
-            Throw New Exception("GridControl¸ê®ÆÅª¨úªì©l¥¢±Ñ¡I" & vbCrLf & ex.Message)
+            Throw New Exception("GridControlè³‡æ–™è®€å–åˆå§‹å¤±æ•—ï¼" & vbCrLf & ex.Message)
         End Try
     End Sub
 
